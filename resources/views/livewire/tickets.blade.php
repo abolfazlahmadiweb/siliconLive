@@ -37,7 +37,9 @@
                 <th>فوریت</th>
                 <th>سرپرست</th>
                 <th>مدیر عامل</th>
-                <th>عملیات</th>
+                @if(!auth()->user()->is_user())
+                    <th>عملیات</th>
+                @endif
             </tr>
             </thead>
 
@@ -92,11 +94,13 @@
                             </svg>
                         </td>
                     @endif
+                    @if(!auth()->user()->is_user())
                     <td>
                         <a href="{{route('ticket-show', $ticket->id)}}" class="btn_tbl os-item">
                             مشاهده
                         </a>
                     </td>
+                    @endif
                 </tr>
             @empty
                 data does not exists

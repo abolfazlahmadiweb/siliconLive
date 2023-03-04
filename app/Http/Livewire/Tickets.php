@@ -9,7 +9,11 @@ class Tickets extends Component
 {
     public function render()
     {
-        $tickets = Ticket::with(['pelan', 'user', 'files'])->get();
+        if (!auth()->user()->is_user()) {
+            $tickets = Ticket::with(['pelan', 'user', 'files'])->get();
+        } else {
+            $tickets = auth()->user()->tickets;
+        }
         return view('livewire.tickets', compact('tickets'));
     }
 }

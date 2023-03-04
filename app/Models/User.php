@@ -50,7 +50,21 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'user_id');
+        return $this->belongsToMany(Role::class);
     }
 
+    public function is_supervisor()
+    {
+        return $this->roles->contains('name', 'supervisor');
+    }
+
+    public function is_ceo()
+    {
+        return $this->roles->contains('name', 'ceo');
+    }
+
+    public function is_user()
+    {
+        return $this->roles->contains('name', 'user');
+    }
 }
