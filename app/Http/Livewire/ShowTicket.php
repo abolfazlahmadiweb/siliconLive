@@ -26,15 +26,23 @@ class ShowTicket extends Component
 
     public function supervisor()
     {
-        if ($this->ticket->supervisor() == null){
+        $actives = Active::where('ticket_id', $this->ticket->id)->first();
+        if ($actives == null) {
             Active::create([
-               'ticket_id' => $this->ticket->id,
-               'supervisor_id' => 1
+                'ticket_id' => $this->ticket->id,
+                'supervisor_id' => 1
             ]);
         } else {
-            $this->ticket->supervisor()->update([
-                'supervisor_id' => null
-            ]);
+            if ($actives->supervisor_id == null){
+                $actives->update([
+                    'supervisor_id' => 1
+                ]);
+            } else {
+                $actives->update([
+                    'supervisor_id' => null
+                ]);
+            }
+
         }
         session()->flash('success', __('tr.activate changed by supervisor'));
         return redirect('/tickets');
@@ -42,15 +50,23 @@ class ShowTicket extends Component
 
     public function ceo()
     {
-        if ($this->ticket->ceo() == null){
+        $actives = Active::where('ticket_id', $this->ticket->id)->first();
+        if ($actives == null) {
             Active::create([
                 'ticket_id' => $this->ticket->id,
                 'ceo_id' => 1
             ]);
         } else {
-            $this->ticket->ceo()->update([
-                'ceo_id' => null
-            ]);
+            if ($actives->ceo_id == null){
+                $actives->update([
+                    'ceo_id' => 1
+                ]);
+            } else {
+                $actives->update([
+                    'ceo_id' => null
+                ]);
+            }
+
         }
         session()->flash('success', __('tr.activate changed by ceo'));
         return redirect('/tickets');
