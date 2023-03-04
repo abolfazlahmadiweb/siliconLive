@@ -170,6 +170,8 @@ body::before {
 }
 
 .os-input .error_text {
+    width: 100%;
+    text-align: center;
     color: #eb759f;
     position: absolute;
     right: 50%;
