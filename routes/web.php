@@ -26,5 +26,5 @@ Route::get('tickets', Tickets::class)->middleware('auth');
 Route::get('create', Create::class)->name('ticket.create')->middleware('auth');
 
 
-Route::get('tickets/{ticket}', ShowTicket::class)->name('ticket-show')->middleware('auth');
-Route::post('update/{ticket}', ShowTicket::class)->name('ticket.update')->middleware('auth');
+Route::get('tickets/{ticket}', ShowTicket::class)->name('ticket-show')->middleware(['auth', 'management']);
+Route::post('update/{ticket}', ShowTicket::class)->name('ticket.update')->middleware(['auth', 'management']);
