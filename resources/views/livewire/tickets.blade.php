@@ -4,6 +4,13 @@
 @section('content')
 
     <div class="os-container content">
+        <form action="{{route('logout')}}" method="post">
+            @csrf
+            <button class="logout">
+                خروج از حساب
+            </button>
+        </form>
+        <!-- top table -->
         <!-- top table -->
         <div class="top_tbl">
             <h1 class="os-bold"> لیست تیکت </h1>

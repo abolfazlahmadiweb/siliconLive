@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -27,6 +28,8 @@ class Register extends Component
         ]);
 
         Auth::login($user);
+
+        return redirect('tickets');
     }
 
     public function validateFrom()

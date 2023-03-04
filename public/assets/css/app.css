@@ -180,6 +180,20 @@ body::before {
     font-size: 11px;
 }
 
+.logout{
+    width: 120px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    background: #f82672;
+}
+
+.logout:hover{
+    transition: .5s;
+    background: #ec78a4;
+}
+
 .os-login form button.btn_log {
     font-size: 18px;
     padding: 14px;
