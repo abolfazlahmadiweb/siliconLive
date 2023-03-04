@@ -286,6 +286,11 @@ th {
     flex: 1;
 }
 
+.mb-3{
+    margin-top: 15px;
+    border-radius: 14px;
+}
+
 thead th {
     font-family: IRANS-bold, roboto, tahoma;
 }

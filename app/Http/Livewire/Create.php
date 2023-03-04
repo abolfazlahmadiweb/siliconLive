@@ -58,7 +58,7 @@ class Create extends Component
             'planId' => 'required|integer|numeric|exists:plans,id',
             'title' => 'required|string|min:8|max:1000',
             'body' => 'required|string|min:30|max:5000',
-            'files.*' => 'nullable|image|mimes:png,jpeg,webp|max:2048'
+            'files.*' => 'nullable|max:2048'
         ]);
     }
 
