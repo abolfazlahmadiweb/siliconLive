@@ -2,12 +2,55 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Plan;
+use App\Models\Ticket;
 use Livewire\Component;
 
 class Create extends Component
 {
+    public $title;
+    public $planId;
+    public $body;
+    public $files;
+
+    public function create()
+    {
+        $this->validateFrom();
+
+        $ticket = auth()->user()->tickets()->create([
+            'plan_id' => $this->planId,
+            'title' => $this->title,
+            'body' => $this->body
+        ]);
+
+        $this->resetInputs();
+
+        session()->flash('success', 'تیکت با موفقیت ایجاد شد');
+    }
+
+    public function resetInputs()
+    {
+        $this->title = null;
+        $this->planId = null;
+        $this->body = null;
+        $this->files = null;
+    }
+
+    public function validateFrom()
+    {
+        $this->validate([
+            'planId' => 'required|integer|numeric|exists:plans,id',
+            'title' => 'required|string|min:8|max:1000',
+            'body' => 'required|string|min:30|max:5000',
+            'files.*' => 'nullable|image|mimetypes:image/jpeg, image/png'
+        ]);
+    }
+
     public function render()
     {
-        return view('livewire.create');
+        return view('livewire.create')
+            ->with('plans', Plan::all())
+            ->extends('layouts.app')
+            ->section('content');
     }
 }

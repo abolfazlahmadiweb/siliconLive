@@ -1,59 +1,71 @@
-@extends('layouts.app')
 @section('title', 'create ticket')
+<div class="os-login upl os-item">
+    <!-- top login -->
+    <h2 class="os-bold">آپلود فایل</h2>
+    <!-- top login -->
 
-@section('content')
+    <!-- border -->
+    <div class="os-border"></div>
+    <!-- border -->
 
-    <div class="os-login upl os-item">
-        <!-- top login -->
-        <h2 class="os-bold">آپلود فایل</h2>
-        <!-- top login -->
+    @include('layouts.partials')
 
-        <!-- border -->
-        <div class="os-border"></div>
-        <!-- border -->
-
-        <!-- form -->
-        <form action="" method="post">
-            <!-- group -->
-            <div class="group">
-                <!-- input os -->
-                <div class="os-input">
-                    <label for="title" class="os-light">موضوع</label>
-                    <input type="text" id="title" class="os-bg" name="title" placeholder="موضوع تیکت" autofocus>
-                </div>
-                <!-- input os -->
-
-                <!-- input os -->
-                <div class="os-input">
-                    <label for="departeman"> دپارتمان </label>
-                    <select name="departeman" class="os-bg" id="departeman">
-                        <option value="انتخاب کنید">انتخاب کنید</option>
-                        <option value="فوری">فوری</option>
-                    </select>
-                </div>
-                <!-- input os -->
-            </div>
-            <!-- group -->
-
+    <!-- form -->
+    <form wire:submit.prevent="create" enctype="multipart/form-data">
+        <!-- group -->
+        <div class="group">
             <!-- input os -->
             <div class="os-input">
-                <label for="description" class="os-light">متن دلخواه</label>
-                <textarea  class="os-bg" name="description" id="description" cols="30" rows="10"></textarea>
+                <label for="title" class="os-light">موضوع</label>
+                <input wire:model="title" type="text" id="title" class="os-bg @error('title') error @enderror" name="title"
+                       placeholder="موضوع تیکت" autofocus>
+                @error('title')
+                <p class="error_text os-light"> {{$message}} </p>
+                @enderror
             </div>
             <!-- input os -->
 
             <!-- input os -->
             <div class="os-input">
-                <label for="file" class="os-light">آپلود فایل</label>
-                <input type="file" id="file" name="file" class="os-bg">
+                <label for="planId"> دپارتمان </label>
+                <select wire:model="planId" name="planId" class="os-bg @error('planId') error @enderror" id="planId">
+                    <option value="0" selected>انتخاب کنید</option>
+                    @foreach($plans as $plan)
+                        <option value="{{$plan->id}}">{{$plan->persian_name . ' ' . $plan->name}}</option>
+                    @endforeach
+                </select>
+                @error('planId')
+                <p class="error_text os-light"> {{$message}} </p>
+                @enderror
             </div>
             <!-- input os -->
+        </div>
+        <!-- group -->
 
-            <!-- button -->
-            <button class="btn_log os-bold">ارسال اطلاعات</button>
-            <!-- button -->
-        </form>
-        <!-- form -->
-    </div>
+        <!-- input os -->
+        <div class="os-input">
+            <label for="description" class="os-light">متن دلخواه</label>
+            <textarea wire:model="body" class="os-bg @error('body') error @enderror" name="body" id="description" cols="30"
+                      rows="10"></textarea>
+            @error('body')
+            <p class="error_text os-light"> {{$message}} </p>
+            @enderror
+        </div>
+        <!-- input os -->
 
-@endsection
+        <!-- input os -->
+        <div class="os-input">
+            <label for="file" class="os-light">آپلود فایل</label>
+            <input wire:model="files" type="file" id="file" name="files[]" class="os-bg @error('files') error @enderror" multiple>
+            @error('files')
+            <p class="error_text os-light"> {{$message}} </p>
+            @enderror
+        </div>
+        <!-- input os -->
+
+        <!-- button -->
+        <button class="btn_log os-bold">ارسال اطلاعات</button>
+        <!-- button -->
+    </form>
+    <!-- form -->
+</div>

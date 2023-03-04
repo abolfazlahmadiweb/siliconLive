@@ -165,8 +165,19 @@ body::before {
     resize: none;
 }
 
-.os-input input.error {
+.os-input input.error,
+.os-input select.error {
     border-color: #eb759f;
+}
+
+.alert-success{
+    background: linear-gradient(45deg,#16a295,#56b569);
+    color: #ffffff;
+    text-align: center;
+    width: 50%;
+    border-radius: 12px;
+    margin: 30px auto;
+    padding: 20px;
 }
 
 .os-input .error_text {
@@ -181,17 +192,26 @@ body::before {
 }
 
 .logout{
-    width: 120px;
-    padding: 10px 20px;
-    border-radius: 5px;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
     color: #ffffff;
     cursor: pointer;
-    background: #f82672;
+    background: #171f33;
+    height: 100%;
+    transition: all .3s;
+}
+
+.left-tick{
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
 }
 
 .logout:hover{
-    transition: .5s;
-    background: #ec78a4;
+    background: #ee2970;
 }
 
 .os-login form button.btn_log {
@@ -226,6 +246,8 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.top_tbl {
     margin-bottom: 10px;
 }
 
