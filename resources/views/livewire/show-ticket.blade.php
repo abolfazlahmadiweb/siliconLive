@@ -74,7 +74,7 @@
             @forelse($files as $file)
                 <img src="{{asset('storage/'.$file->file)}}" alt="{{$file->ticket->id}}" width="100%" height="200px" class="mb-3">
             @empty
-
+                image(s) does not exists
             @endforelse
         </div>
     </form>
