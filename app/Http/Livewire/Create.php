@@ -38,7 +38,7 @@ class Create extends Component
 
         $this->resetInputs();
 
-        session()->flash('success', 'این اولین کسبو کار من است ');
+        session()->flash('success', __('tr.ticket created successfully'));
         return redirect('/tickets');
     }
 

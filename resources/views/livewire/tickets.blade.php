@@ -96,7 +96,7 @@
                     @endif
                     @if(!auth()->user()->is_user())
                     <td>
-                        <a href="{{route('ticket-show', $ticket->id)}}" class="btn_tbl os-item">
+                        <a href="{{route('ticket-show', $ticket->id)}}" class="btn_tbl os-item show">
                             مشاهده
                         </a>
                     </td>

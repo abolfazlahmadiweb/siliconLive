@@ -11,13 +11,14 @@
     @include('layouts.partials')
 
     <!-- form -->
-    <form {{$ticket ? 'wire:submit.prevent=update' : 'wire:submit.prevent="create"'}}>
+    <form wire:submit.prevent="create">
         <!-- group -->
         <div class="group">
             <!-- input os -->
             <div class="os-input">
                 <label for="title" class="os-light">موضوع</label>
-                <input wire:model="title" type="text" id="title" class="os-bg @error('title') error @enderror" name="title"
+                <input wire:model="title" type="text" id="title" class="os-bg @error('title') error @enderror"
+                       name="title"
                        placeholder="موضوع تیکت" autofocus>
                 @error('title')
                 <p class="error_text os-light"> {{$message}} </p>
@@ -45,7 +46,8 @@
         <!-- input os -->
         <div class="os-input">
             <label for="description" class="os-light">متن دلخواه</label>
-            <textarea wire:model="body" class="os-bg @error('body') error @enderror" name="body" id="description" cols="30"
+            <textarea wire:model="body" class="os-bg @error('body') error @enderror" name="body" id="description"
+                      cols="30"
                       rows="10"></textarea>
             @error('body')
             <p class="error_text os-light"> {{$message}} </p>
@@ -69,14 +71,39 @@
             </button>
         @endif
         <!-- button -->
-
-        <div>
-            @forelse($files as $file)
-                <img src="{{asset('storage/'.$file->file)}}" alt="{{$file->ticket->id}}" width="100%" height="200px" class="mb-3">
-            @empty
-                image(s) does not exists
-            @endforelse
-        </div>
     </form>
+    <div>
+        @forelse($files as $file)
+            <img src="{{asset('storage/'.$file->file)}}" alt="{{$file->ticket->id}}" width="100%" height="200px"
+                 class="mb-3">
+        @empty
+            <div class="alert-success">
+                تصویری در این تیکت وجود ندارد
+            </div>
+        @endforelse
+    </div>
+    @if(auth()->user()->is_ceo())
+        <form wire:submit.prevent="ceo">
+            @csrf
+            <button class="status">
+                @if($ticket->ceo() !== null)
+                    تایید شده
+                @else
+                    تایید نشده
+                @endif
+            </button>
+        </form>
+    @elseif(auth()->user()->is_supervisor())
+        <form wire:submit.prevent="supervisor">
+            @csrf
+            <button class="status">
+                @if($ticket->supervisor() !== null)
+                    تایید شده
+                @else
+                    تایید نشده
+                @endif
+            </button>
+        </form>
+    @endif
     <!-- form -->
 </div>

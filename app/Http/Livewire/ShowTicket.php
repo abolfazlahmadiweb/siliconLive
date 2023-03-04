@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Active;
 use App\Models\Plan;
 use App\Models\Ticket;
 use Livewire\Component;
@@ -23,9 +24,36 @@ class ShowTicket extends Component
         $this->files = $ticket->files;
     }
 
-    public function update()
+    public function supervisor()
     {
+        if ($this->ticket->supervisor() == null){
+            Active::create([
+               'ticket_id' => $this->ticket->id,
+               'supervisor_id' => 1
+            ]);
+        } else {
+            $this->ticket->supervisor()->update([
+                'supervisor_id' => null
+            ]);
+        }
+        session()->flash('success', __('tr.activate changed by supervisor'));
+        return redirect('/tickets');
+    }
 
+    public function ceo()
+    {
+        if ($this->ticket->ceo() == null){
+            Active::create([
+                'ticket_id' => $this->ticket->id,
+                'ceo_id' => 1
+            ]);
+        } else {
+            $this->ticket->ceo()->update([
+                'ceo_id' => null
+            ]);
+        }
+        session()->flash('success', __('tr.activate changed by ceo'));
+        return redirect('/tickets');
     }
 
     public function render()
