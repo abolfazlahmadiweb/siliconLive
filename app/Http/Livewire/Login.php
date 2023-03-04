@@ -18,7 +18,7 @@ class Login extends Component
         if(Auth::attempt(array($this->username() => $this->email, 'password' => $this->password))){
             return redirect('tickets');
         }
-        session()->flash('error', 'email and password are wrong.');
+        session()->flash('error', __('tr.email and password are wrong'));
     }
 
     public function logout()

@@ -174,10 +174,23 @@ body::before {
     background: linear-gradient(45deg,#16a295,#56b569);
     color: #ffffff;
     text-align: center;
-    width: 50%;
+    width: 100%;
     border-radius: 12px;
-    margin: 30px auto;
+    margin: 15px auto;
     padding: 20px;
+}
+
+.show{
+
+}
+
+.status{
+    width: 150px;
+    padding: 10px 20px;
+    background: #17a497;
+    color: #ffffff;
+    border-radius: 12px;
+    cursor: pointer;
 }
 
 .os-input .error_text {
@@ -318,6 +331,15 @@ tbody tr:nth-child(2n+1) {
 }
 
 form button.btn_tbl {
+    padding: 6px 16px;
+    border-radius: 5px;
+    background: var(--secendary);
+    color: #ffffff;
+    cursor: pointer;
+}
+
+ a.btn_tbl.show {
+    display: block;
     padding: 6px 16px;
     border-radius: 5px;
     background: var(--secendary);
