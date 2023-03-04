@@ -9,4 +9,8 @@ class Plan extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'persian_name'];
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'plan_id');
+    }
 }
