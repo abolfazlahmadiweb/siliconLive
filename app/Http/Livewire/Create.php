@@ -42,6 +42,11 @@ class Create extends Component
         return redirect('/tickets');
     }
 
+    public function update()
+    {
+
+    }
+
     public function resetInputs()
     {
         $this->title = null;

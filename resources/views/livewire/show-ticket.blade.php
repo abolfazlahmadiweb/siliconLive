@@ -11,7 +11,7 @@
     @include('layouts.partials')
 
     <!-- form -->
-    <form wire:submit.prevent="create">
+    <form {{$ticket ? 'wire:submit.prevent=update' : 'wire:submit.prevent="create"'}}>
         <!-- group -->
         <div class="group">
             <!-- input os -->
@@ -53,18 +53,21 @@
         </div>
         <!-- input os -->
 
-        <!-- input os -->
-        <div class="os-input">
-            <label for="file" class="os-light">آپلود فایل</label>
-            <input wire:model="files" type="file" class="os-bg @error('files') error @enderror" multiple>
-            @error('files.*')
-            <p class="error_text os-light"> {{$message}} </p>
-            @enderror
-        </div>
-        <!-- input os -->
-
         <!-- button -->
-        <button class="btn_log os-bold">ارسال اطلاعات</button>
+        @if(empty($ticket))
+            <!-- input os -->
+            <div class="os-input">
+                <label for="file" class="os-light">آپلود فایل</label>
+                <input wire:model="files" type="file" class="os-bg @error('files') error @enderror" multiple>
+                @error('files.*')
+                <p class="error_text os-light"> {{$message}} </p>
+                @enderror
+            </div>
+            <!-- input os -->
+            <button class="btn_log os-bold">
+                ایجاد تیکت
+            </button>
+        @endif
         <!-- button -->
 
         <div>

@@ -23,6 +23,11 @@ class ShowTicket extends Component
         $this->files = $ticket->files;
     }
 
+    public function update()
+    {
+
+    }
+
     public function render()
     {
         return view('livewire.show-ticket')

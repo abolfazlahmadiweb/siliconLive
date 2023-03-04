@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('actives', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('ticket_id')->unsigned();
-            $table->bigInteger('supervisor_id')->unsigned();
-            $table->bigInteger('ceo_id')->unsigned();
+            $table->bigInteger('supervisor_id')->unsigned()->nullable();
+            $table->bigInteger('ceo_id')->unsigned()->nullable();
 
             $table->foreign('ticket_id')->references('id')->on('tickets')->cascadeOnDelete();
             $table->foreign('supervisor_id')->references('id')->on('users')->cascadeOnDelete();

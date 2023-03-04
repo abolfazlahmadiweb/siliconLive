@@ -29,4 +29,19 @@ class Ticket extends Model
     {
         return $this->hasMany(Media::class, 'ticket_id');
     }
+
+    public function supervisor()
+    {
+        return Active::where('ticket_id', $this->id)->whereNotNull('supervisor_id')->first();
+    }
+
+    public function ceo()
+    {
+        return Active::where('ticket_id', $this->id)->whereNotNull('ceo_id')->first();
+    }
+
+    public function active()
+    {
+        return $this->hasOne(Active::class, 'ticket_id');
+    }
 }
