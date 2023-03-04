@@ -2,16 +2,20 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Media;
 use App\Models\Plan;
 use App\Models\Ticket;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Create extends Component
 {
+    use WithFileUploads;
+
     public $title;
     public $planId;
     public $body;
-    public $files;
+    public $files = [];
 
     public function create()
     {
@@ -23,9 +27,19 @@ class Create extends Component
             'body' => $this->body
         ]);
 
+        foreach ($this->files as $photo) {
+
+            Media::create([
+                'ticket_id' => $ticket->id,
+                'file' => $photo->store('photos')
+            ]);
+
+        }
+
         $this->resetInputs();
 
-        session()->flash('success', 'تیکت با موفقیت ایجاد شد');
+        session()->flash('success', 'این اولین کسبو کار من است ');
+        return redirect('/tickets');
     }
 
     public function resetInputs()
@@ -33,8 +47,10 @@ class Create extends Component
         $this->title = null;
         $this->planId = null;
         $this->body = null;
-        $this->files = null;
+        $this->files =  null;
     }
+
+
 
     public function validateFrom()
     {
@@ -42,7 +58,7 @@ class Create extends Component
             'planId' => 'required|integer|numeric|exists:plans,id',
             'title' => 'required|string|min:8|max:1000',
             'body' => 'required|string|min:30|max:5000',
-            'files.*' => 'nullable|image|mimetypes:image/jpeg, image/png'
+            'files.*' => 'nullable|image|mimes:png,jpeg,webp|max:2048'
         ]);
     }
 

@@ -11,7 +11,7 @@
     @include('layouts.partials')
 
     <!-- form -->
-    <form wire:submit.prevent="create" enctype="multipart/form-data">
+    <form wire:submit.prevent="create">
         <!-- group -->
         <div class="group">
             <!-- input os -->
@@ -56,8 +56,8 @@
         <!-- input os -->
         <div class="os-input">
             <label for="file" class="os-light">آپلود فایل</label>
-            <input wire:model="files" type="file" id="file" name="files[]" class="os-bg @error('files') error @enderror" multiple>
-            @error('files')
+            <input wire:model="files" type="file" class="os-bg @error('files') error @enderror" multiple>
+            @error('files.*')
             <p class="error_text os-light"> {{$message}} </p>
             @enderror
         </div>
