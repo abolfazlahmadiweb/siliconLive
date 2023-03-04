@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Livewire\Register;
 use \App\Http\Livewire\Login;
+use \App\Http\Livewire\Logout;
 use \App\Http\Livewire\Tickets;
 use \App\Http\Livewire\Create;
 
@@ -18,7 +19,7 @@ use \App\Http\Livewire\Create;
 */
 
 Route::get('/', Login::class)->middleware('guest');
-Route::post('logout', Login::class)->middleware('auth')->name('logout');
+Route::post('logout', Logout::class)->middleware('auth');
 Route::get('register', Register::class)->middleware('guest');
 Route::get('tickets', Tickets::class)->middleware('auth');
 Route::get('create', Create::class)->name('ticket.create')->middleware('auth');
